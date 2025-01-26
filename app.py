@@ -444,4 +444,4 @@ def admin_delete_booking(booking_id: int, db: Session = Depends(get_db), current
 
 @app.get("/")
 def read_root():
-    return {"message": "Authorization is ready!"}
+    return {"message": "App is working!"}
