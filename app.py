@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 logger.add("app.log", rotation="500 MB", level="INFO", backtrace=True, diagnose=True)
 
 # Database setup
-DATABASE_URL = "postgresql://postgres:Monkey123!@localhost/shr_app"
+DATABASE_URL = "postgresql://postgres:NaRRmVpnSlbwqKTbWBYBWrdoRKkhdHKo@postgres.railway.internal:5432/railway"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
