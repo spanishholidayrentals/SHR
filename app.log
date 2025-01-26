@@ -1,0 +1,7 @@
+2025-01-26 11:03:02.517 | INFO     | app:search_properties:272 - Search request received: location=Madrid, start_date=2025-02-08, end_date=2025-02-09
+
+
+2025-01-26 11:03:02.522 | INFO     | app:search_properties:296 - Booked property IDs during the range: SELECT bookings.property_id 
+FROM bookings 
+WHERE bookings.start_date < :start_date_1 AND bookings.end_date > :end_date_1
+2025-01-26 11:03:02.531 | INFO     | app:search_properties:304 - No properties available for the criteria: location=Madrid, start_date=2025-02-08, end_date=2025-02-09
