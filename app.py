@@ -168,6 +168,31 @@ def login(
     access_token = create_access_token(data={"sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
+@app.post("/auth/login")
+def login(
+    email: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db),
+):
+    """
+    Authenticate user and return a token with the userType.
+    """
+    # Fetch user by email
+    user = db.query(User).filter(User.email == email).first()
+    if not user or not verify_password(password, user.hashed_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password"
+        )
+    
+    # Determine user type based on role
+    user_type = "owner" if user.role == "owner" else "user"
+
+    # Create access token
+    access_token = create_access_token(data={"sub": user.email, "role": user.role})
+
+    return {"token": access_token, "userType": user_type}
+
 # Protected route to retrieve the current user's details
 @app.get("/users/me/")
 def read_users_me(current_user: User = Depends(get_current_user)):
